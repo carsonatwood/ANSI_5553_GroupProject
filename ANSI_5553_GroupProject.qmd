@@ -1,12 +1,22 @@
 ---
 title: "Group Project"
-subtitle: :"Carson Atwood, Cade Hamil, Cody Gruber"
+subtitle: "Carson Atwood, Cody Gruber, Cade Hamil"
 ---
 
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+# Graph 1 - CA
 
 ```{r}
-1 + 1
+
+```
+
+# Graph 2 - CG
+
+```{r}
+
+```
+
+# Graph 3 - CH
+
+```{r}
+
 ```
