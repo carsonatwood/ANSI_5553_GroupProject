@@ -1,21 +1,69 @@
 ---
 title: "Group Project"
 subtitle: "Carson Atwood, Cody Gruber, Cade Hamil"
+echo: false
+message: false
+warning: false
 ---
 
-# Graph 1 - CA
+# Background
+
+This dataset was obtained from Mendeley Data. Briefly, the study evaluated the effects of replacing steam-flaked corn with malted barley in feedlot rations on intake, as well as in vivo and in vitro ruminal fermentation characteristics. The primary objective was to determine how increasing dietary inclusion of malted barley influences dry matter intake and ruminal fermentation responses. All results in the paper were presented in table form, with no figures provided to visualize the data.
+
+# Carson Atwood
+
+I thought the presentation of data in this paper made it harder than it needed to be to interpret. Table 3 combines a lot of variables, timepoints, and contrasts all in one place, which makes it difficult to clearly see treatment effects or pick out meaningful biological patterns. The same issue shows up with the in vitro gas production data, where values are reported, but the actual gas production curves are not shown, even though they were modeled. To improve this, I cleaned and reorganized the dataset by removing unnecessary variables and calculating mean ± SE across incubation time for each treatment. I then recreated the data as a production curve, which makes it much easier to see how gas production changes over time and how treatments separate.
+
+```{r}
+library(readxl)
+library(dplyr)
+library(ggplot2)
+
+df <- read_excel("Supplementary data.xlsx", sheet = "gas production")
+
+df <- df %>%
+  mutate(
+    TRT = factor(TRT, levels = c("CON", "10MB", "20MB", "30MB"))
+  )
+
+gas_sum <- df %>%
+  group_by(Time, TRT) %>%
+  summarise(
+    mean_gas = mean(gas, na.rm = TRUE),
+    se_gas = sd(gas, na.rm = TRUE) / sqrt(sum(!is.na(gas))),
+    .groups = "drop"
+  )
+
+ggplot(gas_sum, aes(x = Time, y = mean_gas, color = TRT, fill = TRT)) +
+  geom_line(linewidth = 1.2) +
+  geom_ribbon(aes(ymin = mean_gas - se_gas, ymax = mean_gas + se_gas),
+              alpha = 0.20, color = NA) +
+  labs(
+    title = "Gas Production Over Incubation Time",
+    x = "Incubation Time",
+    y = "Gas Produced (mL)",
+    color = "Treatment",
+    fill = "Treatment"
+  ) +
+  theme_classic(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5),
+    axis.title = element_text(face = "bold"),
+    legend.title = element_text(face = "bold")
+  )
+```
+
+# Cody Gruber 
+
+\[Summary\]
 
 ```{r}
 
 ```
 
-# Graph 2 - CG
+# Cade Hamil
 
-```{r}
-
-```
-
-# Graph 3 - CH
+\[Summary\]
 
 ```{r}
 
