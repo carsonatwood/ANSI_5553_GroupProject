@@ -12,7 +12,7 @@ This dataset was obtained from Mendeley Data. Briefly, the study evaluated the e
 
 # Carson Atwood
 
-I thought the presentation of data in this paper made it harder than it needed to be to interpret. Table 3 combines a lot of variables, timepoints, and contrasts all in one place, which makes it difficult to clearly see treatment effects or pick out meaningful biological patterns. The same issue shows up with the in vitro gas production data, where values are reported, but the actual gas production curves are not shown, even though they were modeled. To improve this, I cleaned and reorganized the dataset by removing unnecessary variables and calculating mean ± SE across incubation time for each treatment. I then recreated the data as a production curve, which makes it much easier to see how gas production changes over time and how treatments separate.
+I thought the presentation of data in this paper made it harder than it needed to be to interpret. Table 3 combines a lot of variables and timepoints all in one place, which makes it difficult to clearly see treatment effects or pick out meaningful biological patterns. The same issue shows up with the in vitro gas production data, where values are reported, but the actual gas production curves are not shown, even though they were modeled. To improve this, I cleaned and reorganized the dataset by removing unnecessary variables and calculating mean ± SE across incubation time for each treatment. I then recreated the data as a production curve, which makes it much easier to see how gas production changes over time and how treatments separate.
 
 ```{r}
 library(readxl)
@@ -41,7 +41,7 @@ ggplot(gas_sum, aes(x = Time, y = mean_gas, color = TRT, fill = TRT)) +
   labs(
     title = "Gas Production Over Incubation Time",
     x = "Incubation Time",
-    y = "Gas Produced (mL)",
+    y = "Gas Produced, mL",
     color = "Treatment",
     fill = "Treatment"
   ) +
