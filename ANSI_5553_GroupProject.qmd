@@ -74,33 +74,29 @@ library(dplyr)
 df <- read_excel("Supplementary Data.xlsx", sheet = "DMI")
 
 # Check the exact column names in your data
-print(names(df))
-head(df)
 
-# Create scatter plot with tag number and DMI colored by treatment
-plot1 <- ggplot(df, aes(x = as.factor(`tag`), y = `DMI.kg`, color = `TRT`)) +
-  geom_point(size = 3, alpha = 0.7) +
-  geom_jitter(width = 0.2) +
+
+# Create scatter plot with treatment on x-axis and tag as color/legend
+plot1 <- ggplot(df, aes(x = as.factor(`TRT`), y = `DMI.kg`, color = as.factor(`tag`), group = as.factor(`tag`))) +
+  geom_line(alpha = 0.6, linewidth = 0.8) +
+  geom_point(size = 3, alpha = 0.8) +
   labs(
-    title = "DMI by Tag Number and Treatment",
-    x = "Tag Number",
-    y = "DMI (Dry Matter Intake)",
-    color = "Treatment"
+    title = "DMI by Treatment Group",
+    x = "Treatment",
+    y = "DMI (kg - Dry Matter Intake)",
+    color = "Animal Tag"
   ) +
   theme_minimal() +
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1),
-    plot.title = element_text(size = 14, face = "bold")
+    plot.title = element_text(size = 14, face = "bold"),
+    legend.position = "right"
   )
 
-
-
-# Display both plots
+# Display the plot
 print(plot1)
 
-
-# Optional: Save both plots
+# Optional: Save the plot
 ggsave("DMI_scatter_plot.png", plot1, width = 12, height = 6)
-
 
 ```
