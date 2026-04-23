@@ -93,27 +93,14 @@ plot1 <- ggplot(df, aes(x = as.factor(`tag`), y = `DMI.kg`, color = `TRT`)) +
     plot.title = element_text(size = 14, face = "bold")
   )
 
-# Create bar plot showing mean DMI by tag and treatment
-plot2 <- df %>%
-  group_by(`Tag Number`, `TRT`) %>%
-  summarise(mean_DMI = mean(`DMI`, na.rm = TRUE), .groups = 'drop') %>%
-  ggplot(aes(x = as.factor(`Tag Number`), y = mean_DMI, fill = `TRT`)) +
-  geom_col(position = "dodge") +
-  labs(
-    title = "Mean DMI by Tag Number and Treatment",
-    x = "Tag Number",
-    y = "Mean DMI (Dry Matter Intake)",
-    fill = "Treatment"
-  ) +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
 
 # Display both plots
 print(plot1)
-print(plot2)
+
 
 # Optional: Save both plots
 ggsave("DMI_scatter_plot.png", plot1, width = 12, height = 6)
-ggsave("DMI_bar_plot.png", plot2, width = 12, height = 6)
+
 
 ```
