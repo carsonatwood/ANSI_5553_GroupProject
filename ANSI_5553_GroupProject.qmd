@@ -64,7 +64,7 @@ ggplot(gas_sum, aes(x = Time, y = mean_gas, color = TRT, fill = TRT)) +
 
 # Cade Hamil
 
-\[Summary\]
+I took the dry matter intake by treatment for each individual animal and placed it into a line graph to demonstrate how the changes in DMI by treatment changed over time.
 
 ```{r}
 library(readxl)
