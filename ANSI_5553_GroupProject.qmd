@@ -64,7 +64,7 @@ ggplot(gas_sum, aes(x = Time, y = mean_gas, color = TRT, fill = TRT)) +
 
 # Cade Hamil
 
-I took the dry matter intake by treatment for each individual animal and placed it into a line graph to demonstrate how the changes in DMI by treatment changed over time.
+I took the dry matter intake by treatment for each individual animal and placed it into a line graph to demonstrate how the changes in DMI by treatment changed over time. As opposed to the table that they have in the paper. I essentially added a new table to compensate for what I thought was a lack of communication in the table. Because Methane production is affected by DMI.
 
 ```{r}
 library(readxl)
