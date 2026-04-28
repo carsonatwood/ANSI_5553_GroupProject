@@ -4,6 +4,7 @@ subtitle: "Carson Atwood, Cody Gruber, Cade Hamil"
 echo: false
 message: false
 warning: false
+embed-resources: true
 ---
 
 # Background
