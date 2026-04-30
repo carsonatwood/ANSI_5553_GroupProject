@@ -96,7 +96,7 @@ ggplot(df_summary, aes(x = TRT, y = ace, color = TRT, fill = TRT, group = 1))+
 I took the dry matter intake by treatment for each individual animal and placed it into a line graph to demonstrate how the changes in DMI by treatment changed over time. As opposed to the table that they have in the paper. I essentially added a new table to compensate for what I thought was a lack of communication in the table. Because Methane production is affected by DMI.
 
 ```{r}
-library(readxl) library(ggplot2) library(dplyr)
+
 
 # Read the DMI tab from the Excel file
 
@@ -120,9 +120,11 @@ plot1 <- ggplot(df,
     theme_minimal() +
     theme(axis.text.x = element_text(angle = 45, hjust = 1),
           plot.title = element_text(size = 14, face = "bold"),
-          legend.position = "right" )
-
-theme( axis.text.x = element_text(angle = 45, hjust = 1), plot.title = element_text(size = 14, face = "bold"), legend.position = "right" )
+          legend.position = "right" ) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1), 
+    plot.title = element_text(size = 14, face = "bold"), 
+    legend.position = "right" )
 
 print(plot1)
 ```
