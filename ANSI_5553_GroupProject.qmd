@@ -4,6 +4,7 @@ subtitle: "Carson Atwood, Cody Gruber, Cade Hamil"
 echo: false
 message: false
 warning: false
+embed-resources: true
 ---
 
 # Background
@@ -92,20 +93,36 @@ ggplot(df_summary, aes(x = TRT, y = ace, color = TRT, fill = TRT, group = 1))+
 
 # Cade Hamil
 
-\[Summary\]
+I took the dry matter intake by treatment for each individual animal and placed it into a line graph to demonstrate how the changes in DMI by treatment changed over time. As opposed to the table that they have in the paper. I essentially added a new table to compensate for what I thought was a lack of communication in the table. Because Methane production is affected by DMI.
 
-\`\`\`{r} library(readxl) library(ggplot2) library(dplyr)
+```{r}
+library(readxl) library(ggplot2) library(dplyr)
 
 # Read the DMI tab from the Excel file
 
-df \<- read_excel("Supplementary Data.xlsx", sheet = "DMI")
+df <- read_excel("Supplementary Data.xlsx", sheet = "DMI")
 
 # Check the exact column names in your data
 
 # Create scatter plot with treatment on x-axis and tag as color/legend
 
-plot1 \<- ggplot(df, aes(x = as.factor(`TRT`), y = `DMI.kg`, color = as.factor(`tag`), group = as.factor(`tag`))) + geom_line(alpha = 0.6, linewidth = 0.8) + geom_point(size = 3, alpha = 0.8) + labs( title = "DMI by Treatment Group", x = "Treatment", y = "DMI (kg - Dry Matter Intake)", color = "Animal Tag" ) + theme_minimal() + theme( axis.text.x = element_text(angle = 45, hjust = 1), plot.title = element_text(size = 14, face = "bold"), legend.position = "right" )
+plot1 <- ggplot(df, 
+                aes(x = as.factor(`TRT`), 
+                    y = `DMI.kg`, 
+                    color = as.factor(`tag`), 
+                    group = as.factor(`tag`))) + 
+    geom_line(alpha = 0.6, linewidth = 0.8) +
+    geom_point(size = 3, alpha = 0.8) + 
+    labs(title = "DMI by Treatment Group", 
+         x = "Treatment", 
+         y = "DMI (kg - Dry Matter Intake)",
+         color = "Animal Tag" ) +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1),
+          plot.title = element_text(size = 14, face = "bold"),
+          legend.position = "right" )
 
 theme( axis.text.x = element_text(angle = 45, hjust = 1), plot.title = element_text(size = 14, face = "bold"), legend.position = "right" )
 
 print(plot1)
+```
