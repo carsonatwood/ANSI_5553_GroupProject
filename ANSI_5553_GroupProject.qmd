@@ -55,48 +55,57 @@ ggplot(gas_sum, aes(x = Time, y = mean_gas, color = TRT, fill = TRT)) +
 
 # Cody Gruber
 
-\[Summary\]
+Overall, I thought this study presented an interesting idea by implementing malted barley, an alternative feedstuff that had previously been identified as containing increased amounts of 𝛂-amylase, as a means of mitigating methane emissions. However, as they stated in the paper, the amylase content of the malted barley they fed was not measured, leaving the cause of changes in DMI and VFA content uncertain. To better visualize the changes in VFA contents, I produced a figure showing the changes in each VFA component as malted barley inclusion is increased.
 
 ```{r}
+library(readxl)
+library(dplyr)
+library(ggplot2)
 
+df <- read_excel("Supplementary data.xlsx", sheet = "in vivo data")
+
+df <- df %>%
+  mutate(
+    TRT = factor(TRT, levels = c("CON", "10MB", "20MB", "30MB"))
+  )
+
+df_summary <- df %>%
+  group_by(TRT) %>%
+  summarize(ace = mean(ace, na.rm = TRUE))
+
+ggplot(df_summary, aes(x = TRT, y = ace, color = TRT, fill = TRT, group = 1))+
+    geom_line(linewidth = 1.2)+
+  labs(
+    title = "VFA Changes with Increasing Malted Barley Inclusion",
+    x = "Malted Barley Inclusion (%)",
+    y = "VFA (mM)",
+    color = "TRT",
+    fill = "TRT"
+  ) +
+  theme_classic(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5),
+    axis.title = element_text(face = "bold"),
+    legend.title = element_text(face = "bold")
+  )
 ```
 
 # Cade Hamil
 
 \[Summary\]
 
-```{r}
-library(readxl)
-library(ggplot2)
-library(dplyr)
+\`\`\`{r} library(readxl) library(ggplot2) library(dplyr)
 
 # Read the DMI tab from the Excel file
-df <- read_excel("Supplementary Data.xlsx", sheet = "DMI")
+
+df \<- read_excel("Supplementary Data.xlsx", sheet = "DMI")
 
 # Check the exact column names in your data
 
-
 # Create scatter plot with treatment on x-axis and tag as color/legend
-plot1 <- ggplot(df, aes(x = as.factor(`TRT`), y = `DMI.kg`, color = as.factor(`tag`), group = as.factor(`tag`))) +
-  geom_line(alpha = 0.6, linewidth = 0.8) +
-  geom_point(size = 3, alpha = 0.8) +
-  labs(
-    title = "DMI by Treatment Group",
-    x = "Treatment",
-    y = "DMI (kg - Dry Matter Intake)",
-    color = "Animal Tag"
-  ) +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    plot.title = element_text(size = 14, face = "bold"),
-    legend.position = "right"
-  )
 
-theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    plot.title = element_text(size = 14, face = "bold"),
-    legend.position = "right"
-  )
+plot1 \<- ggplot(df, aes(x = as.factor(`TRT`), y = `DMI.kg`, color = as.factor(`tag`), group = as.factor(`tag`))) + geom_line(alpha = 0.6, linewidth = 0.8) + geom_point(size = 3, alpha = 0.8) + labs( title = "DMI by Treatment Group", x = "Treatment", y = "DMI (kg - Dry Matter Intake)", color = "Animal Tag" ) + theme_minimal() + theme( axis.text.x = element_text(angle = 45, hjust = 1), plot.title = element_text(size = 14, face = "bold"), legend.position = "right" )
+
+theme( axis.text.x = element_text(angle = 45, hjust = 1), plot.title = element_text(size = 14, face = "bold"), legend.position = "right" )
 
 print(plot1)
